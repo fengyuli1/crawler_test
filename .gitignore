@@ -7,3 +7,4 @@ __pycache__/
 .git/
 .idea/
 pdm.lock
+save_log/
