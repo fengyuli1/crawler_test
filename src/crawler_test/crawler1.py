@@ -28,6 +28,7 @@ class SendRequest:
         if data:
             body["data"] = data
         response = requests.request(method, url, **body)
+        response.encoding = response.apparent_encoding
         # res = response.headers['Content-Type']
         # if 'json' in response.headers['Content-Type']:
         #     print(11111111111111111)
