@@ -10,8 +10,9 @@ dependencies = [
     "requests>=2.31.0",
     "bs4>=0.0.1",
     "lxml>=4.9.2",
+    "aiohttp>=3.8.4",
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.8.1"
 readme = "README.md"
 license = {text = "MIT"}
 

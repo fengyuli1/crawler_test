@@ -1,7 +1,9 @@
-from multiprocessing.dummy import Pool
-from lxml import etree
-from src.crawler_test.crawler1 import send_request, SendRequest
 import time
+from multiprocessing.dummy import Pool
+
+from lxml import etree
+
+from src.crawler_test.crawler1 import SendRequest, send_request
 
 
 def get_data(url):
@@ -23,10 +25,10 @@ def get_data(url):
 if __name__ == "__main__":
     start_time = time.time()
     url = "https://www.gamersky.com/"
-    response = send_request.send_request(url=url, method='get')
+    response = send_request.send_request(url=url, method="get")
     tree = etree.HTML(response.text)
     sub_tree = tree.xpath('//ul[@class="SPimgtxt"]')[0]
-    img_url_list = sub_tree.xpath('./li/a/@href')
+    img_url_list = sub_tree.xpath("./li/a/@href")
     pool = Pool(8)
     pool.map(get_data, img_url_list)
     pool.close()
