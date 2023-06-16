@@ -11,8 +11,10 @@ if not os.path.exists(Log_path):
 
 
 class SendRequest:
-    @staticmethod
-    def send_request(**kwargs):
+    def __init__(self):
+        self.session = requests.session()
+
+    def send_request(self, **kwargs):
         default_headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36"
         }
@@ -27,7 +29,7 @@ class SendRequest:
             body["params"] = params
         if data:
             body["data"] = data
-        response = requests.request(method, url, **body)
+        response = self.session.request(method, url, **body)
         response.encoding = response.apparent_encoding
         # res = response.headers['Content-Type']
         # if 'json' in response.headers['Content-Type']:
