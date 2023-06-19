@@ -10,6 +10,23 @@ if not os.path.exists(Log_path):
     os.mkdir(Log_path)
 
 
+def save(**kwargs):
+    file = kwargs.get("file")
+    file_name = kwargs.get("name", f"1{time.time()}.html")
+    print(file_name)
+    file_path = os.path.join(Log_path, file_name)
+    if isinstance(file, bytes):
+        with open(file_path, "wb") as fp:
+            fp.write(file)
+    else:
+        with open(file_path, "w", encoding="utf-8") as fp:
+            if isinstance(file, dict) or isinstance(file, list):
+                json.dump(file, fp=fp, ensure_ascii=False)
+            else:
+                fp.write(file)
+    return file_path
+
+
 class SendRequest:
     def __init__(self):
         self.session = requests.session()
@@ -37,23 +54,6 @@ class SendRequest:
         # else:
         #     print(222222222222222)
         return response
-
-    @staticmethod
-    def save(**kwargs):
-        file = kwargs.get("file")
-        file_name = kwargs.get("name", f"1{time.time()}.html")
-        print(file_name)
-        file_path = os.path.join(Log_path, file_name)
-        if isinstance(file, bytes):
-            with open(file_path, "wb") as fp:
-                fp.write(file)
-        else:
-            with open(file_path, "w", encoding="utf-8") as fp:
-                if isinstance(file, dict) or isinstance(file, list):
-                    json.dump(file, fp=fp, ensure_ascii=False)
-                else:
-                    fp.write(file)
-        return file_path
 
 
 send_request = SendRequest()
