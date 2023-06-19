@@ -1,0 +1,20 @@
+from selenium import webdriver
+import time
+
+dirver = webdriver.Chrome()
+dirver.get('https://kyfw.12306.cn/otn/resources/login.html')
+time.sleep(1)
+dirver.find_element(by='xpath', value='//*[@id="toolbar_Div"]/div[2]/div[2]/ul/li[1]/a').click()
+time.sleep(1)
+dirver.find_element(by='id', value='J-userName').send_keys('11111111111111111')
+dirver.find_element(by='id', value='J-password').send_keys('111111111111111111')
+time.sleep(1)
+dirver.find_element(by='id', value='J-login').click()
+time.sleep(1)
+btn = dirver.find_element(by='xpath', value='//*[@class="nc_iconfont btn_slide"]')
+action = webdriver.ActionChains(dirver)
+action.click_and_hold(btn)
+action.drag_and_drop_by_offset(btn, 400, 0).perform()
+action.release()
+time.sleep(3)
+dirver.quit()
