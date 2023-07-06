@@ -1,8 +1,14 @@
 import time
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-dirver = webdriver.Chrome()
+# 创建一个参数对象，用来控制chrome以无界面模式打开（可以视为固定写法）
+opt = Options()  # 新建参数对象
+opt.add_argument("--headless")  # 无头
+opt.add_argument("--disbale-gpu")  # 无gpu图形化界面
+
+dirver = webdriver.Chrome(options=opt)  # 把参数配置设置到浏览器中
 dirver.get("https://kyfw.12306.cn/otn/resources/login.html")
 time.sleep(1)
 dirver.find_element(
@@ -36,6 +42,7 @@ while True:
             ).click()
             time.sleep(0.2)
     except Exception:
+        print(11111111111111)
         break
 time.sleep(3)
 dirver.quit()
